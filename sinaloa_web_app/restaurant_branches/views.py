@@ -1,12 +1,6 @@
 from django.shortcuts import render
-from .openai_service import query_openai
 from .gemini_service import query_gemini, validate_and_execute_query
 from django.http import JsonResponse
-
-def ask_openai(request):
-    prompt = request.GET.get("prompt", "Hola, ¿cómo estás?")
-    response = query_openai(prompt)
-    return JsonResponse({"response": response})
 
 def ask_gemini(request):
     prompt = request.GET.get("prompt", "Hola, ¿cómo estás?")
