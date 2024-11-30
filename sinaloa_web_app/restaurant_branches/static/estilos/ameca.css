@@ -1,0 +1,520 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* ================= GLOBAL ================= */
+/* Reset de márgenes y configuración de box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fuente principal para todo el documento */
+body {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* ================= HEADER ================= */
+/* Estilo del encabezado con imagen de fondo y gradiente */
+header {
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), 
+        url('../images/5.jpg'); /* Ruta de tu imagen */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+/* Tamaño del icono de busqueda */
+.search-icon {
+    width: 20px;  /* Ajusta el tamaño según tus necesidades */
+    height: 20px; /* Ajusta el tamaño según tus necesidades */
+    fill: #bdbecb;  /* Si necesitas cambiar el color del ícono */
+}
+
+/* Estilos para el cuadro de búsqueda */
+.group {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el ícono y la barra */
+    justify-content: center; /* Centra el contenido */
+    position: relative;
+    gap: 0.5rem; /* Espacio entre el ícono y el input */
+    max-width: 300px; /* Ajusta el ancho máximo */
+    margin: 0 auto; /* Centra horizontalmente en el contenedor */
+    padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .group {
+        max-width: 100%; /* Asegura que ocupe el 100% del espacio en pantallas pequeñas */
+        padding-top: 10px;
+        align-items: center; /* Ajusta el padding si es necesario */
+    }
+}
+
+.input {
+    font-family: "Montserrat", sans-serif;
+    width: 300px;
+    height: 40px;
+    padding-left: 100px;
+    box-shadow: 0 0 0 1.5px #2b2c37, 0 0 25px -17px #000;
+    border: 0;
+    border-radius: 12px;
+    background-color: #333;
+    outline: none;
+    color: #bdbecb;
+    transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: text;
+    z-index: 0;
+}
+
+.input::placeholder {
+    color: #bdbecb;
+}
+
+.input:hover {
+    box-shadow: 0 0 0 2.5px #2f303d, 0px 0px 25px -15px #000;
+}
+
+.input:active {
+    transform: scale(0.95);
+}
+
+.input:focus {
+    box-shadow: 0 0 0 2.5px #2f303d;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    fill: #bdbecb;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* ================= MENÚ ================= */
+/* Contenedor del menú principal */
+.nav-opciones {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Espacio entre los botones */
+    align-items: center;
+    margin-top: 2rem; /* Espaciado superior */
+    flex-wrap: wrap; /* Permite que los botones pasen a la siguiente línea si no caben */
+}
+
+/* Botones principales del menú */
+.nav-opciones .dropdown .btn {
+    background-color: #005f73; /* Azul oscuro */
+    color: white; /* Texto blanco */
+    border: none; /* Sin bordes */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out; /* Efecto suave */
+}
+
+.nav-opciones .dropdown .btn:hover {
+    background-color: #0a9396; /* Color azul más claro al pasar el mouse */
+}
+
+/* Menú desplegable */
+.nav-opciones .dropdown .dropdown-menu {
+    background-color: #e0fbfc; /* Fondo del menú desplegable */
+    border-radius: 5px;
+    border: none; /* Sin bordes */
+    padding: 10px;
+}
+
+/* Opciones del menú desplegable */
+.nav-opciones .dropdown .dropdown-item {
+    color: #333; /* Color del texto */
+    padding: 8px 16px; /* Espaciado interno */
+    border-radius: 3px; /* Bordes redondeados */
+    transition: background-color 0.3s ease-in-out; /* Efecto suave */
+}
+
+.nav-opciones .dropdown .dropdown-item:hover {
+    background-color: #005f73; /* Azul oscuro en hover */
+    color: white; /* Texto blanco */
+}
+
+/* Botones de las opciones individuales */
+.opciones {
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #005f73; /* Azul oscuro para el borde */
+    border-radius: 0.25rem;
+    color: #005f73; /* Azul oscuro para el texto */
+    background-color: white; /* Fondo blanco */
+    font-size: 18px; /* Tamaño de fuente */
+    cursor: pointer;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+    text-align: center;
+}
+
+.opciones:hover {
+    color: white; /* Texto blanco en hover */
+    background-color: #005f73; /* Fondo azul oscuro en hover */
+}
+
+/* ================= RESPONSIVIDAD ================= */
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+    .nav-opciones {
+        flex-direction: column; /* Coloca los botones en una columna */
+        gap: 0.5rem; /* Reduce el espacio entre botones */
+    }
+
+    .nav-opciones .dropdown .btn,
+    .opciones {
+        width: 100%; /* Botones ocupan todo el ancho del contenedor */
+        text-align: center;
+    }
+}
+
+
+ /* ================= ELEMENTOS DE LAS SUGERENCIAS ================= */
+/* Sección de sugerencias */
+.menu-sugerencias {
+    margin: 40px auto;
+    max-width: 1200px;
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #010066;
+    padding-bottom: 10px;
+    display: block; /* Asegúrate de que sea visible por defecto */
+}
+
+/* Cuando no quieres mostrar las sugerencias */
+.oculto {
+    display: none;
+}
+
+/* Botones de Navegación */
+.botones-nav button {
+    background-color: #010066;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.botones-nav button:hover {
+    background-color: #3d3a8d;
+}
+
+/* Título de cada sugerencia */
+.sugerencia-item h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #010066; /* Azul elegante */
+    margin-bottom: 20px;
+}
+
+/* Grid de sugerencias */
+.menu-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Estilo de cada elemento */
+.menu-item {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out;
+    padding: 15px;
+    flex: 0 1 calc(25% - 20px); /* Cuatro elementos por fila */
+    max-width: calc(25% - 20px);
+    min-width: 200px;
+}
+
+.menu-item:hover {
+    transform: translateY(-10px); /* Elevación al pasar el mouse */
+}
+
+/* Imágenes de los elementos */
+.menu-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.menu-item h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    font-family: 'Arial', sans-serif;
+    color: #010066;
+}
+
+.menu-item p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0 10px;
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .menu-item {
+        flex: 0 1 calc(50% - 20px); /* Dos elementos por fila en tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-item {
+        flex: 0 1 calc(100% - 20px); /* Un elemento por fila en móviles */
+    }
+}
+
+/* ================= ELEMENTOS DEL MENÚ ================= */
+/* Estilo para la cuadrícula de elementos */
+/* Contenedor centrado */
+.menu-container {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    padding: 0 20px; /* Espacio a los lados */
+    box-sizing: border-box;
+    text-align: center; /* Centra el texto dentro del contenedor */
+}
+
+/* Título del tipo de platillo */
+.menu-title {
+    text-align: center; /* Centra el título */
+    font-size: 24px;
+    font-weight: bold;
+    color: #010066;
+    margin-bottom: 20px; /* Separación del título con la cuadrícula */
+}
+
+/* Cuadrícula dentro del contenedor */
+.menu-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente fila si es necesario */
+    gap: 20px; /* Espacio entre los elementos */
+    max-width: 1200px; /* Limita el ancho total */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    margin: 0 auto; /* Centra la cuadrícula en el contenedor */
+}
+
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta el tamaño mínimo */
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Ajusta para pantallas pequeñas */
+    }
+}
+
+/* Casillas */
+.menu-item {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out;
+    padding: 15px;
+    flex: 0 1 calc(20% - 20px); /* Cada casilla ocupa el 20% del ancho menos el espacio entre elementos */
+    max-width: calc(20% - 20px); /* Garantiza que el tamaño máximo sea consistente */
+    min-width: 200px; /* Tamaño mínimo para pantallas más pequeñas */
+    box-sizing: border-box; /* Asegura que el padding y border no afecten el tamaño */
+}
+
+
+.menu-item:hover {
+    transform: translateY(-10px); /* Efecto de elevación */
+}
+
+/* Imagen */
+.menu-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.menu-item img:hover {
+    transform: scale(1.1); /* Zoom-in al pasar el mouse */
+}
+
+.menu-item h3 {
+    font-size: 20px;
+    margin: 10px 0;
+    font-family: 'Arial', sans-serif;
+    color: #010066; /* Azul elegante */
+}
+
+.menu-item p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0 10px 0;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.menu-item button {
+    background-color: #010066;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.menu-item button:hover {
+    background-color: #0056b3; /* Efecto hover en botón */
+}
+
+
+/* ================= CATEGORÍAS ================= */
+/* Estilo para cada categoría de platillo */
+.categoria-platillo {
+    margin-bottom: 30px;
+    border-bottom: 2px solid #010066;
+    padding-bottom: 10px;
+}
+
+.categoria-platillo h3 {
+    font-size: 24px;
+    color: #010066;
+    margin-bottom: 15px;
+}
+
+/* ================= RESPONSIVIDAD ================= */
+/* Ajustes para pantallas medianas */
+@media (max-width: 1024px) {
+    .menu-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    }
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: 1fr; /* 1 columna */
+    }
+}
+
+/* ================= FOOTER ================= */
+/* Estilo del pie de página */
+footer {
+    position: relative; /* Asegura que quede al final */
+    width: 100%;
+    background-color: #010066; /* Fondo azul elegante */
+    color: #ffffff; /* Texto blanco */
+    text-align: center;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center;
+    padding: 20px; /* Espaciado interno */
+    font-family: 'Arial', sans-serif;
+    margin-top: auto; /* Footer al final del contenido */
+    flex-wrap: wrap; /* Ajusta los elementos si hay varios */
+}
+
+/* Contacto y horarios */
+.contacto, .horarios {
+    flex: 1;
+    color: #ffffff; /* Texto blanco */
+    text-align: left;
+    font-size: 14px; /* Tamaño del texto */
+}
+
+.contacto h3, .horarios h3 {
+    font-size: 16px; /* Títulos un poco más grandes */
+    margin-bottom: 10px;
+    color: #ffffff; /* Asegura que los títulos sean blancos */
+}
+
+/* Lista de íconos */
+.wrapper {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Espacio entre los íconos */
+}
+
+/* Estilo de los íconos de redes sociales */
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid #ffffff; /* Borde blanco */
+    border-radius: 50%; /* Fondo circular */
+    padding: 10px; /* Espaciado interno */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.icon:hover {
+    background-color: #3d3a8d; /* Fondo elegante al hacer hover */
+    transform: scale(1.1); /* Efecto de agrandamiento */
+}
+
+.icon a {
+    color: #ffffff; /* Íconos blancos */
+    text-decoration: none;
+    display: inline-block;
+}
+
+.icon svg {
+    width: 24px; /* Tamaño del ícono */
+    height: 24px;
+    fill: #ffffff; /* Color blanco para los SVG */
+    transition: fill 0.3s ease;
+}
+
+.icon:hover svg {
+    fill: #8c84b2; /* Cambia el color del ícono al hacer hover */
+}
+
+/* Ajusta el tooltip */
+.tooltip {
+    display: none;
+}
+
+.icon:hover .tooltip {
+    display: block;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 10px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+}

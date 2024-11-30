@@ -1,0 +1,406 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Satisfy&display=swap');
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+    background-color: #060606;
+}
+
+/* Navbar Styles */
+.menu {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 30px;
+    background-color: rgba(0, 0, 0, 0.4); /* Transparent Background */
+}
+
+/* Logo Styles */
+.logo {
+  
+    color: #FFFFFF;
+    font-size: 25px;
+    font-weight: 50;
+    text-transform: uppercase;
+}
+
+/* Navbar Links */
+.navbar {
+    display: flex;
+}
+
+.navbar ul {
+    display: flex;
+}
+
+.navbar ul li {
+    list-style: none;
+}
+
+.navbar ul li a {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 550;
+    padding: 10px 20px;
+    
+    display: block;
+}
+
+.navbar ul li a:hover {
+    color: #C9A538;
+}
+
+/* Menu Icon for Mobile */
+.menu-icono {
+    display: none; /* Hide on Desktop */
+    cursor: pointer;
+}
+
+/* Hide Menu Checkbox */
+#menu {
+    display: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+    /* Display Menu Icon */
+    .menu-icono {
+        display: block;
+    }
+    
+    /* Hide Navbar Links by Default */
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.8); /* Darker Transparent Background for Mobile */
+        display: none;
+        flex-direction: column;
+    }
+
+    /* Display Navbar Links when Checkbox is Checked */
+    #menu:checked ~ .navbar {
+        display: flex;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+    }
+
+    .navbar ul li {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.header{
+    height: 700px;
+}
+/* Header Text */
+/* Asegúrate de que .header-content ocupe el 100% del ancho de la página */
+.header-content {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Configura .header-txt para que esté completamente centrado */
+.header-txt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Ocupa el 100% del ancho disponible */
+}
+
+
+
+
+/*DEsvanecer hacia arriba*/
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Configuración inicial del texto del encabezado */
+.header-txt h1,
+.header-txt p {
+    opacity: 0; /* Inicia invisible */
+    transform: translateY(20px); /* Comienza desplazado */
+}
+
+/* Aplica la animación cuando el elemento es visible */
+.header-txt.animated h1,
+.header-txt.animated p {
+    animation: fadeInUp 1.5s ease forwards;
+}
+/* Retarda la animación de los párrafos para que aparezcan después del título */
+.header-txt p {
+    animation-delay: 0.5s;
+}
+
+
+
+
+/* Encabezado principal (h1) */
+.header-txt h1 {
+    font-size: 5vw;
+    font-family: 'Satisfy', cursive;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+}
+
+/* Texto del párrafo (p) */
+.header-txt p {
+    font-size: 2.0vw;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .header-txt h1 {
+        font-size: 10vw;
+    }
+    .header-txt p {
+        font-size: 5vw;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .header-txt h1 {
+        font-size: 12vw;
+    }
+    .header-txt p {
+        font-size: 6vw;
+    }
+}
+
+/* Carousel container */
+.carousel {
+    position: relative;
+    max-width: 60%; /* Limita el ancho del carrusel */
+    margin: 20px auto; /* Centra el carrusel horizontalmente */
+    overflow: hidden;
+    height: 600px; /* Ajusta la altura */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+}
+
+/* Carousel slides container */
+.carousel-container {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+    height: 100%;
+}
+
+/* Estilo de cada slide */
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+    position: relative;
+}
+
+.carousel-slide img {
+    width: 600px; /* Ajusta el tamaño de la imagen */
+    height: 600px;
+    object-fit: cover; /* Asegura que la imagen cubra el área disponible sin distorsionarse */
+    border-radius: 10px;
+}
+
+/* Resto de los estilos permanece igual */
+.carousel-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+    user-select: none;
+    z-index: 10;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/*  mapas*/
+.map-row {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los mapas se muevan a la siguiente línea si no caben */
+    justify-content: center; /* Centra los mapas horizontalmente */
+    gap: 20px; /* Espacio entre los mapas */
+    padding: 0px;
+  }
+  
+  .mapa {
+    flex: 1 1 45%; /* Hace que los mapas se adapten al tamaño del contenedor */
+    min-width: 300px; /* Ancho mínimo para mantener un tamaño adecuado en pantallas pequeñas */
+    max-width: 500px; /* Ancho máximo para mantener proporciones */
+    height: 300px; /* Altura de los mapas */
+    border: 0;
+  }
+  
+
+/* Contenedor de las tarjetas */
+.direcciones {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se ajusten automáticamente si el espacio no es suficiente */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    margin-bottom: 20px;
+    gap: 20px; /* Espacio entre las tarjetas */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    max-width: 1200px; /* Limita el ancho máximo del contenedor */
+    margin-left: auto;
+    margin-right: auto; 
+    padding-top: 50px;
+
+    transform: translateX(100%); /* Comienza fuera de la pantalla a la derecha */
+    animation: slideInRight 1s forwards; /* Aplica la animación */
+}
+
+/* Definición de la animación */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%); /* Comienza fuera de la pantalla a la derecha */
+    }
+    to {
+        transform: translateX(0); /* Se mueve a la posición original */
+    }
+}
+
+/* Si quieres que aparezca solo cuando se active (por ejemplo, al hacer scroll), usa esto */
+.direcciones.visible {
+    animation: slideInRight 2s forwards;
+}
+
+
+  
+  /* Estilo de las tarjetas */
+  .card {
+    width: 250px; /* Tamaño fijo para la tarjeta */
+    height: 100px; /* Tamaño fijo para la tarjeta */
+    background: #0B1E4B;
+    transition: all 0.4s;
+    border-radius: 10px;
+    color: #fdfdfe;
+    font-size: 15px;
+    font-weight: 400;
+    font-family:'Poppins', sans-serif important !important;
+    /* Cambié el flex para evitar que las tarjetas se expandan */
+    margin: 0 110px; /* Espacio entre las tarjetas */
+    display: flex;
+    flex-direction: column; /* Para organizar el contenido dentro de la tarjeta */
+  }
+  
+  /* Efecto hover en las tarjetas */
+  .card:hover {
+    border-radius: 15px;
+    cursor: pointer;
+    transform: scale(1.05); /* Reduce el tamaño del efecto de escala para que no sea tan exagerado */
+    background: #333;;
+  }
+  
+  /* Contenido de la tarjeta */
+  .first-content {
+    height: 100%;
+    width: 100%;
+    transition: all 0.4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    border-radius: 8px;
+  }
+  
+  /* Cambio del contenido al hacer hover */
+  .card:hover .first-content {
+    height: 0;
+    opacity: 0;
+  }
+  
+  /* Segundo contenido (que aparece al hacer hover) */
+  .second-content {
+    height: 0%;
+    width: 100%;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transition: all 0.4s;
+    font-size: 2px;
+    transform: rotate(90deg) scale(-1);
+  }
+  
+  .card:hover .second-content {
+    opacity: 1;
+    height: 100%;
+    font-size: 14px; /* Aumenté el tamaño de la fuente para mejor visibilidad */
+    font-weight: var(--bs-nav-link-font-weight);
+    transform: rotate(0deg);
+  }
+  
+  .footer {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo completamente transparente */
+    color: #fff;
+    padding: 30px 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+.footer h5 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.footer p, .footer ul {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
