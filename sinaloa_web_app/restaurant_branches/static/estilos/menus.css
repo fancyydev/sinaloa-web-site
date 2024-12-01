@@ -518,3 +518,11 @@ footer {
     left: 50%;
     transform: translateX(-50%);
 }
+
+.menu-section {
+    display: none;
+  }
+  
+.menu-section.active {
+    display: block;
+  }

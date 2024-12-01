@@ -10,8 +10,8 @@ class Menu(models.Model):
     
 class Category(models.Model):
     CATEGORIES_TYPES = [
-        ('fria', 'Fria'),
-        ('caliente', 'Caliente'),
+        ('fria', 'Comida Fria'),
+        ('caliente', 'Comida Caliente'),
         ('postres', 'Postres'),
         ('bebidas', 'Bebidas'),
     ]

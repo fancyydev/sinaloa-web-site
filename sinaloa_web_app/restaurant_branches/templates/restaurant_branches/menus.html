@@ -60,205 +60,52 @@
 
     <!-- Barra de navegación -->
     <div class="nav-opciones">
-      <!-- Cocina Fría -->
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary" onclick="mostrarTodas('cocinaFria')">Cocina Fría</button>
-        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class="visually-hidden">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('aguachiles')">Aguachiles</a></li>
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('cocteles')">Cocteles</a></li>
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('torres')">Torres de Mariscos</a></li>
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('tostadas')">Tostadas</a></li>
-        </ul>
-      </div>
-
-      <!-- Dropdown para Cocina Caliente -->
-      <!-- Cocina Caliente -->
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary" onclick="mostrarTodas('cocinaCaliente')">Cocina Caliente</button>
-        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class="visually-hidden">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('cortes')">Cortes</a></li>
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('camarones')">Camarones</a></li>
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('salmones')">Salmones</a></li>
-        </ul>
-      </div>
-
-      <!-- Dropdown para Postres -->
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary" onclick="mostrarTodas('postres')">Postres</button>
-        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class="visually-hidden">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('fresas')">Fresas con Crema</a></li>
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('helados')">Helados</a></li>
-        </ul>
-      </div>
-      
-      <!-- Dropdown para Bebidas -->
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary" onclick="mostrarTodas('bebidas')">Bebidas</button>
-        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class="visually-hidden">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('agua')">Agua Fresca</a></li>
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('alcohol')">Bebidas Alcohólicas</a></li>
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('digestivos')">Digestivos</a></li>
-          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('refresco')">Refrescos</a></li>
-        </ul>
-      </div>
+      {% for type, categories in grouped_categories.items %}
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary" onclick="mostrarTodas('{{ type }}')">
+            {{ type|title }}
+          </button>
+          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            {% for category in categories %}
+              <li>
+                <a class="dropdown-item" href="#" onclick="mostrarCategoria('{{ category.slug }}')">
+                  {{ category.name }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% empty %}
+        <p>No hay categorias</p> 
+      {% endfor %}
+    </div>
+    
+    <!-- Sección para mostrar platillos -->
+    <div id="menu-dishes">
+      {% for category, dishes in dishes_by_category.items %}
+        {% if dishes %}
+          <div class="menu-section" id="{{ category.slug }}" data-type="{{ category.type }}">
+            <h3>{{ category.name }}</h3>
+            <div class="menu-grid">
+              {% for dish in dishes %}
+                <div class="menu-item">
+                  <img src="{{ dish.img.url }}" alt="{{ dish.name }}" loading="lazy" />
+                  <h3>{{ dish.name }}</h3>
+                  <p>{{ dish.description }}</p>
+                  <span class="price">${{ dish.price }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% empty %}
+        <p>No hay platillos</p> 
+      {% endfor %}
     </div>
 
-    <!-- Sección de sugerencias (oculta por defecto) -->
-    <section id="sugerencias" class="menu-sugerencias">
-      <div class="sugerencia-item">
-        <h3>Cocina Fría</h3>
-        <div class="menu-grid">
-
-          <div class="menu-item">
-            <img src="images/aguachiles.jpg" alt="Aguachiles" />
-            <h3>Aguachiles</h3>
-            <p>Descripción.</p>
-          </div>
-          <div class="menu-item">
-            <img src="images/aguachiles.jpg" alt="Aguachiles" />
-            <h3>Aguachiles</h3>
-            <p>Descripción.</p>
-          </div>
-          <div class="menu-item">
-            <img src="images/aguachiles.jpg" alt="Aguachiles" />
-            <h3>Aguachiles</h3>
-            <p>Descripción.</p>
-          </div>
-          <div class="menu-item">
-            <img src="images/aguachiles.jpg" alt="Aguachiles" />
-            <h3>Aguachiles</h3>
-            <p>Descripción.</p>
-          </div>
-          <div class="menu-item">
-            <img src="images/aguachiles.jpg" alt="Aguachiles" />
-            <h3>Aguachiles</h3>
-            <p>Descripción.</p>
-          </div>
-          <div class="menu-item">
-            <img src="images/aguachiles.jpg" alt="Aguachiles" />
-            <h3>Aguachiles</h3>
-            <p>Descripción.</p>
-          </div>
-          <div class="menu-item">
-            <img src="images/aguachiles.jpg" alt="Aguachiles" />
-            <h3>Aguachiles</h3>
-            <p>Descripción.</p>
-          </div>
-          <div class="menu-item">
-            <img src="images/aguachiles.jpg" alt="Aguachiles" />
-            <h3>Aguachiles</h3>
-            <p>Descripción.</p>
-          </div>
-        </div>
-        <div class="menu-sugerencias"></div>
-      </div>
-      <div class="sugerencia-item">
-        <h3>Cocina Caliente</h3>
-        <div class="menu-grid">
-          <div class="menu-item">
-            <img src="images/salmones.jpg" alt="Salmón" />
-            <h3>Salmones</h3>
-            <p>Descripción.</p>
-          </div>
-        </div>
-        <div class="menu-sugerencias"></div>
-      </div>
-      <div class="sugerencia-item">
-        <h3>Bebidas</h3>
-        <div class="menu-grid">
-          <div class="menu-item">
-            <img src="images/bebidas.jpg" alt="Bebidas alcohólicas" />
-            <h3>Bebidas Alcohólicas</h3>
-            <p>Descripción.</p>
-          </div>
-        </div>
-        <div class="menu-sugerencias"></div>
-      </div>
-      <div class="sugerencia-item">
-        <h3>Postres</h3>
-        <div class="menu-grid">
-          <div class="menu-item">
-            <img src="images/postres.jpg" alt="Fresas con crema" />
-            <h3>Fresas con Crema</h3>
-            <p>Descripción.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Secciones del menú -->
-    <section class="menu">
-      <!-- Sección de Cocina Fría -->
-      <div id="cocinaFria" class="menu-section">
-        <!-- Aguachiles -->
-        <div id="aguachiles" class="categoria-platillo" style="display: none">
-          <h3 class="menu-title">Aguachiles</h3>
-          <div class="menu-grid">
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 1" />
-              <h3>Platillo 1</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-          </div>
-        </div>
-        <!-- Cocteles -->
-        <div id="cocteles" class="categoria-platillo" style="display: none">
-          <h3 class="menu-title">Cocteles</h3>
-          <div class="menu-grid">
-            <div class="menu-item">
-              <img src="images/2.jpg" alt="Platillo 1" />
-              <h3>Platillo 1</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$180</span>
-            </div>
-            
-          </div>
-        </div>
-        
-      </div>
-
-      <!-- Sección de Cocina Caliente -->
-      <div id="cocinaCaliente" class="menu-section">
-        <!-- Cortes -->
-        <div id="cortes" class="categoria-platillo" style="display: none">
-          <h3 class="menu-title">Cortes</h3>
-          <div class="menu-grid">
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 1" />
-              <h3>Platillo 1</h3>
-              <p>Descripción del platillo.</p>
-            </div>
-          </div>
-        </div>
-        <!-- Camarones -->
-        <div id="camarones" class="categoria-platillo" style="display: none">
-          <h3 class="menu-title">Camarones</h3>
-          <div class="menu-grid">
-            <div class="menu-item">
-              <img src="images/2.jpg" alt="Platillo 1" />
-              <h3>Platillo 1</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$180</span>
-            </div>
-        
-          </div>
-        </div>
-
-      </div>
-
-      
     <!-- Pie de página -->
     <footer>
       <!-- Contenedor de Contacto -->
@@ -313,40 +160,48 @@
 
     <!-- JavaScript para manejar la interactividad -->
     <script>
-      // Mostrar todas las categorías dentro de una sección específica
-      function mostrarTodas(seccion) {
-        // Primero ocultamos las sugerencias
-        document.getElementById("sugerencias").classList.add("oculto");
+      document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll(".menu-section");
 
-        // Ocultar todas las secciones del menú
-        document.querySelectorAll(".menu-section").forEach((el) => {
-          el.classList.remove("active");
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");  // Agrega la clase active cuando sea visible
+              observer.unobserve(entry.target);      // Deja de observar una vez que se muestra
+            }
+          });
         });
 
-        // Mostrar la sección principal seleccionada
-        const seleccion = document.getElementById(seccion);
-        if (seleccion) {
-          seleccion.classList.add("active");
+        sections.forEach(section => observer.observe(section));
+      });
 
-          // Mostrar todas las categorías dentro de la sección
-          seleccion.querySelectorAll(".categoria-platillo").forEach((el) => {
-            el.style.display = "block";
-          });
-        }
+      
+      function mostrarTodas(type) {
+        // Obtener todas las secciones del menú
+        const sections = document.querySelectorAll(".menu-section");
+        
+        // Ocultar todas las secciones primero
+        sections.forEach((section) => section.classList.remove("active"));
+        
+        // Mostrar solo las secciones cuyo data-type coincide con el tipo
+        sections.forEach((section) => {
+          if (section.getAttribute("data-type") === type) {
+            section.classList.add("active");
+          }
+        });
       }
 
-      // Mostrar una categoría específica dentro de la sección
-      function mostrarCategoria(categoria) {
-        // Ocultar todas las categorías
-        document.querySelectorAll(".categoria-platillo").forEach((el) => {
-          el.style.display = "none";
-        });
 
-        // Mostrar la categoría seleccionada
-        const seleccion = document.getElementById(categoria);
-        if (seleccion) {
-          seleccion.style.display = "block";
-        }
+      function mostrarCategoria(slug) {
+          // Ocultar todas las secciones
+          const sections = document.querySelectorAll(".menu-section");
+          sections.forEach((section) => section.classList.remove("active"));
+
+          // Mostrar solo la sección correspondiente al slug
+          const section = document.getElementById(slug);
+          if (section) {
+            section.classList.add("active");
+          }
       }
     </script>
   </body>

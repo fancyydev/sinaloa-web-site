@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from .gemini_service import query_gemini, validate_and_execute_query, preprocess_prompt
-from .models import *
+from .models import RestaurantBranch
+from restaurant_menus.models import Menu, Category, Dishes
+from itertools import groupby
+from operator import attrgetter
 from django.http import JsonResponse
 
 # def ask_gemini(request):
@@ -33,11 +36,60 @@ def home(request):
     restaurants = RestaurantBranch.objects.all()
     return render(request, 'restaurant_branches/principal.html', {'restaurants': restaurants})
 
-def menus(request, slug):
+# Nos permite devolver las categorias agrupadas por tipo
+# def menus(request, slug):
     
-   # menu = get_object_or_404(RestaurantBranch, slug=slug)
+#     restaurant = get_object_or_404(RestaurantBranch, slug=slug)
+#     menu = Menu.objects.get(restaurant_branch=restaurant)
+#     categories = Category.objects.filter(menu=menu)
+    
+#     # Organizar categorías por tipo
+#     grouped_categories = {
+#         type_key: list(group)
+#         for type_key, group in groupby(categories, key=lambda x: x.type)
+#     }
+    
+#     return render(request, 'restaurant_branches/menus.html', {'grouped_categories': grouped_categories})
 
-    return render(request, 'restaurant_branches/menus.html')
+def menus(request, slug):
+    restaurant = get_object_or_404(RestaurantBranch, slug=slug)
+    menu = Menu.objects.get(restaurant_branch=restaurant)
+    #categories = Category.objects.filter(menu=menu)
+    #Ordenamos primero las categorias en base a su type
+    categories = sorted(
+        Category.objects.filter(menu=menu),
+        key=lambda cat: [t[0] for t in Category.CATEGORIES_TYPES].index(cat.type)
+    )
+
+    print(categories)
+    # Agrupar platillos por categoría
+    dishes_by_category = {
+        category: Dishes.objects.filter(category=category)
+        for category in categories
+    }
+
+    # Ordenar las categorías por 'type' antes de agrupar
+    #ategories_sorted = sorted(categories, key=attrgetter('type'))
+
+    # Agrupar categorías por tipo
+    grouped_categories = {
+        type_key: list(group)
+        #for type_key, group in groupby(categories_sorted, key=attrgetter('type'))
+        for type_key, group in groupby(categories, key=attrgetter('type'))
+    }
+
+    
+    print(grouped_categories)
+
+    return render(
+        request,
+        'restaurant_branches/menus.html',
+        {
+            'grouped_categories': grouped_categories,
+            'dishes_by_category': dishes_by_category,
+        }
+    )
+
     
 
 def handle_user_query(request):
