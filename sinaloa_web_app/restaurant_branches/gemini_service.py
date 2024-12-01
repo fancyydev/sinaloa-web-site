@@ -25,7 +25,9 @@ def query_gemini(prompt, model="gemini-1.5-flash"):
     Procesa un prompt utilizando Gemini para generar consultas dinámicas en Django ORM.
     """
     
-    #Son las instrucciones dadas a gemini para que construya el codigo que nos permitira extraer datos de la base de datos
+    # Son las instrucciones dadas a gemini para que construya el codigo que nos permitira extraer datos de la base de datos
+    # FALTA ACTUALIZAR EL MODELO DE CATEGORIA
+    
     system_instruction = """
     Eres un asistente para gestionar una base de datos de un restaurante usando Django ORM. 
     La base de datos contiene los modelos:
@@ -34,6 +36,7 @@ def query_gemini(prompt, model="gemini-1.5-flash"):
     - `RestaurantBranch`: Representa las sucursales de un restaurante. Los campos de este modelo incluyen:
         - `name` (CharField): El nombre de la sucursal.
         - `logo` (ImageField): Una imagen del logotipo de la sucursal, almacenada en la ruta `restaurant/images/`.
+        - `slug` (CharField): Un identificador único para la sucursal.
         - `description` (TextField): Una descripción de la sucursal.
         - `phone_number` (CharField): El número de teléfono de la sucursal, con un máximo de 15 caracteres.
         - `email` (CharField): El correo electrónico de la sucursal, con un máximo de 255 caracteres.

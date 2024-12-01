@@ -16,9 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
+# Revisar como servir el contenido al desplegar
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('restaurant_menus/', include('restaurant_menus.urls')),
-    path('restaurant_branches/', include('restaurant_branches.urls')),
-]
+    path('', include('restaurant_branches.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

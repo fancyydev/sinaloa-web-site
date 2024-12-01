@@ -5,6 +5,6 @@ from .models import *
 class RestaurantBranchAdmin(admin.ModelAdmin):
     list_display = ['name', 'phone_number', 'email']
     search_fields = ['name', 'description', 'phone_number', 'email']
-    
+    prepopulated_fields = {'slug':('name',)}
 
 # Register your models here.

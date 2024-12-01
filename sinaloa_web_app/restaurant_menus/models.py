@@ -9,8 +9,15 @@ class Menu(models.Model):
         return f"{self.name}-{self.restaurant_branch}"
     
 class Category(models.Model):
+    CATEGORIES_TYPES = [
+        ('fria', 'Fria'),
+        ('caliente', 'Caliente'),
+        ('postres', 'Postres'),
+        ('bebidas', 'Bebidas'),
+    ]
     name= models.CharField(max_length=255)
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    type = models.CharField(max_length=15, choices=CATEGORIES_TYPES)
     slug = models.CharField(max_length=255)
     def __str__(self):
         return f"{self.name}-{self.menu}"

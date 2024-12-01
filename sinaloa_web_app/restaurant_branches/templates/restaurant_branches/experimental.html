@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="{% static 'estilos/ameca.css' %}">
+    <link rel="stylesheet" href="{% static 'estilos/menus.css' %}">
 
     <style>
       /* Estilos para la barra de navegación del menú */
@@ -49,207 +49,67 @@
 
     <!-- Barra de búsqueda -->
     <div class="group">
-      <!-- Icono de búsqueda -->
       <svg viewBox="0 0 24 12" aria-hidden="true" class="search-icon">
         <g>
-          <path
-            d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
-          ></path>
+          <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
         </g>
       </svg>
-      <!-- Barra de entrada para búsqueda -->
-      <input
-        id="query"
-        class="input"
-        type="search"
-        placeholder="Buscar"
-        name="searchbar"
-      />
+      <input id="query" class="input" type="search" placeholder="Buscar" name="searchbar" />
     </div>
 
     <!-- Barra de navegación -->
     <div class="nav-opciones">
-      <!-- Dropdown para Cocina Fría -->
+      <!-- Cocina Fría -->
       <div class="btn-group">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="mostrarTodas('cocinaFria')"
-        >
-          Cocina Fría
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+        <button type="button" class="btn btn-secondary" onclick="mostrarTodas('cocinaFria')">Cocina Fría</button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
           <span class="visually-hidden">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu">
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('aguachiles')"
-              >Aguachiles</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('cocteles')"
-              >Cocteles</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('torres')"
-              >Torres de Mariscos</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('tostadas')"
-              >Tostadas</a
-            >
-          </li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('aguachiles')">Aguachiles</a></li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('cocteles')">Cocteles</a></li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('torres')">Torres de Mariscos</a></li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('tostadas')">Tostadas</a></li>
         </ul>
       </div>
 
       <!-- Dropdown para Cocina Caliente -->
+      <!-- Cocina Caliente -->
       <div class="btn-group">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="mostrarTodas('cocinaCaliente')"
-        >
-          Cocina Caliente
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+        <button type="button" class="btn btn-secondary" onclick="mostrarTodas('cocinaCaliente')">Cocina Caliente</button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
           <span class="visually-hidden">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu">
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('cortes')"
-              >Cortes</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('camarones')"
-              >Camarones</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('salmones')"
-              >Salmones</a
-            >
-          </li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('cortes')">Cortes</a></li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('camarones')">Camarones</a></li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('salmones')">Salmones</a></li>
         </ul>
       </div>
 
       <!-- Dropdown para Postres -->
       <div class="btn-group">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="mostrarTodas('postres')"
-        >
-          Postres
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+        <button type="button" class="btn btn-secondary" onclick="mostrarTodas('postres')">Postres</button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
           <span class="visually-hidden">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu">
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('fresas')"
-              >Fresas con Crema</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('helados')"
-              >Helados</a
-            >
-          </li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('fresas')">Fresas con Crema</a></li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('helados')">Helados</a></li>
         </ul>
       </div>
+      
       <!-- Dropdown para Bebidas -->
       <div class="btn-group">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="mostrarTodas('bebidas')"
-        >
-          Bebidas
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+        <button type="button" class="btn btn-secondary" onclick="mostrarTodas('bebidas')">Bebidas</button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
           <span class="visually-hidden">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu">
-          <li>
-            <a class="dropdown-item" href="#" onclick="mostrarCategoria('agua')"
-              >Agua Fresca</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('alcohol')"
-              >Bebidas Alcohólicas</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('digestivos')"
-              >Digestivos</a
-            >
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              href="#"
-              onclick="mostrarCategoria('refresco')"
-              >Refrescos</a
-            >
-          </li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('agua')">Agua Fresca</a></li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('alcohol')">Bebidas Alcohólicas</a></li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('digestivos')">Digestivos</a></li>
+          <li><a class="dropdown-item" href="#" onclick="mostrarCategoria('refresco')">Refrescos</a></li>
         </ul>
       </div>
     </div>
@@ -350,37 +210,6 @@
               <h3>Platillo 1</h3>
               <p>Descripción del platillo.</p>
               <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Platillo 2</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 3" />
-              <h3>Platillo 3</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 4" />
-              <h3>Platillo 4</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 5" />
-              <h3>Platillo 5</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 6" />
-              <h3>Platillo 6</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
           </div>
         </div>
         <!-- Cocteles -->
@@ -393,24 +222,7 @@
               <p>Descripción del platillo.</p>
               <span class="price">$180</span>
             </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Platillo 2</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 3" />
-              <h3>Platillo 3</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 4" />
-              <h3>Platillo 4</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
+            
           </div>
         </div>
         <!-- Torres -->
@@ -423,12 +235,7 @@
               <p>Descripción del platillo.</p>
               <span class="price">$220</span>
             </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Platillo 2</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
+            
           </div>
         </div>
         <!-- Tostadas -->
@@ -440,24 +247,6 @@
               <h3>Platillo 1</h3>
               <p>Descripción del platillo.</p>
               <span class="price">$130</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Platillo 2</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 3" />
-              <h3>Platillo 3</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 4" />
-              <h3>Platillo 4</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
             </div>
           </div>
         </div>
@@ -474,24 +263,6 @@
               <h3>Platillo 1</h3>
               <p>Descripción del platillo.</p>
             </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Platillo 2</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 3" />
-              <h3>Platillo 3</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 4" />
-              <h3>Platillo 4</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
           </div>
         </div>
         <!-- Camarones -->
@@ -504,24 +275,7 @@
               <p>Descripción del platillo.</p>
               <span class="price">$180</span>
             </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Platillo 2</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 3" />
-              <h3>Platillo 3</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 4" />
-              <h3>Platillo 4</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
+        
           </div>
         </div>
         <!-- Salmon -->
@@ -533,24 +287,6 @@
               <h3>Platillo 1</h3>
               <p>Descripción del platillo.</p>
               <span class="price">$220</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Platillo 2</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 3" />
-              <h3>Platillo 3</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 4" />
-              <h3>Platillo 4</h3>
-              <p>Descripción del platillo.</p>
-              <span class="price">$150</span>
             </div>
           </div>
         </div>
@@ -598,36 +334,6 @@
               <p>Descripción de la Bebida.</p>
               <span class="price">$150</span>
             </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Bebida 2</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 3" />
-              <h3>Bebida 3</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 4" />
-              <h3>Bebida 4</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 5" />
-              <h3>Bebida 5</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 6" />
-              <h3>Bebida 6</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
           </div>
         </div>
         <!-- Bebidas Alcoholicas -->
@@ -641,54 +347,7 @@
               <p>Descripción de la Bebida.</p>
               <span class="price">$180</span>
             </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Bebida 2</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 3" />
-              <h3>Bebida 3</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 4" />
-              <h3>Bebida 4</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 5" />
-              <h3>Bebida 5</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 6" />
-              <h3>Bebida 6</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 7" />
-              <h3>Bebida 7</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 8" />
-              <h3>Bebida 8</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 9" />
-              <h3>Bebida 9</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
+            
           </div>
         </div>
         <!-- Digestivos -->
@@ -702,12 +361,6 @@
               <p>Descripción de la Bebida.</p>
               <span class="price">$220</span>
             </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Bebida 2</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
           </div>
         </div>
         <!-- Refrescos -->
@@ -720,36 +373,6 @@
               <h3>Bebida 1</h3>
               <p>Descripción de la Bebida.</p>
               <span class="price">$130</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 2" />
-              <h3>Bebida 2</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 3" />
-              <h3>Bebida 3</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 4" />
-              <h3>Bebida 4</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 5" />
-              <h3>Bebida 5</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
-            </div>
-            <div class="menu-item">
-              <img src="images/1.jpg" alt="Platillo 6" />
-              <h3>Bebida 6</h3>
-              <p>Descripción de la Bebida.</p>
-              <span class="price">$150</span>
             </div>
           </div>
         </div>
