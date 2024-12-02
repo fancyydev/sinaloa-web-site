@@ -35,6 +35,11 @@
       .menu-section.active {
         display: block;
       }
+
+      /* Estilos para el chat bot*/
+      .chatbot-container {
+        z-index: 1050;
+      }
     </style>
     
     <!-- Script de Bootstrap -->
@@ -105,6 +110,33 @@
         <p>No hay platillos</p> 
       {% endfor %}
     </div>
+   
+    <!-- Botón fijo para reabrir el chat -->
+    <button id="reopen-chat-btn" class="btn btn-primary position-fixed bottom-0 end-0 m-3"
+    style="z-index: 1060;" onclick="toggleChat()">
+    💬 Chat
+    </button>
+
+    <!-- Ventana de Chat flotante -->
+    <div class="chatbot-container position-fixed bottom-0 end-0 p-3">
+      <div class="card border-primary shadow-lg d-none" id="chatbot-card" style="width: 300px;">
+        <div class="card-header bg-primary text-white d-flex justify-content-between">
+          <span>Chat del Restaurante</span>
+          <button class="btn-close btn-close-white" onclick="toggleChat()" aria-label="Cerrar"></button>
+        </div>
+        <div class="card-body" id="chatbot-body" style="height: 400px; overflow-y: auto;">
+          <p class="text-muted">Pregúntanos cualquier cosa sobre el menú o la sucursal.</p>
+        </div>
+        <div class="card-footer">
+          <div class="input-group">
+            <input type="text" id="chatbot-input" class="form-control" placeholder="Escribe tu pregunta...">
+            <button class="btn btn-primary" onclick="sendMessage()">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
 
     <!-- Pie de página -->
     <footer>
@@ -160,6 +192,44 @@
 
     <!-- JavaScript para manejar la interactividad -->
     <script>
+      function toggleChat() {
+        const chatCard = document.getElementById('chatbot-card');
+        const reopenButton = document.getElementById('reopen-chat-btn');
+        
+        // Alternar visibilidad
+        if (chatCard.classList.contains('d-none')) {
+          chatCard.classList.remove('d-none'); // Mostrar chat
+          reopenButton.classList.add('d-none'); // Ocultar botón
+        } else {
+          chatCard.classList.add('d-none'); // Ocultar chat
+          reopenButton.classList.remove('d-none'); // Mostrar botón
+        }
+      }
+
+      async function sendMessage() {
+        const input = document.getElementById('chatbot-input');
+        const message = input.value.trim();
+        if (!message) return;
+
+        // Mostrar mensaje del usuario
+        const chatBody = document.getElementById('chatbot-body');
+        chatBody.innerHTML += `<div><strong>Tú:</strong> ${message}</div>`;
+        input.value = '';
+        
+        // Realizar consulta al servidor
+        const response = await fetch(`/handle_user_query?prompt=${encodeURIComponent(message)}`);
+        const data = await response.json();
+
+        // Mostrar respuesta del servidor
+        if (data.answer) {
+          chatBody.innerHTML += `<div><strong>Sinaloa Asistente:</strong> <p>${data.answer}</p></div>`;
+        } else {
+          chatBody.innerHTML += `<div><strong>Sinaloa Asistente:</strong> <p>Lo siento, no pude encontrar una respuesta.</p></div>`;
+        }
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+
       document.addEventListener("DOMContentLoaded", () => {
         const sections = document.querySelectorAll(".menu-section");
 
@@ -174,6 +244,7 @@
 
         sections.forEach(section => observer.observe(section));
       });
+
 
       
       function mostrarTodas(type) {

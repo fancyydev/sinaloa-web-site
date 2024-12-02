@@ -5,10 +5,10 @@ from django.conf import settings
 from .models import RestaurantBranch
 from restaurant_menus.models import Menu, Category, Dishes
 from django.forms.models import model_to_dict
-
+import json
 
 # Configurar clave API
-genai.configure(api_key=settings.OPENAI_API_KEY)
+genai.configure(api_key=settings.GOOGLE_API_KEY)
 
 def preprocess_prompt(prompt):
     """
@@ -30,7 +30,6 @@ def query_gemini(prompt, model="gemini-1.5-flash"):
     
     system_instruction = """
     Eres un asistente para gestionar una base de datos de un restaurante usando Django ORM. 
-    La base de datos contiene los modelos:
     La base de datos contiene los siguientes modelos:
 
     - `RestaurantBranch`: Representa las sucursales de un restaurante. Los campos de este modelo incluyen:
@@ -40,6 +39,7 @@ def query_gemini(prompt, model="gemini-1.5-flash"):
         - `description` (TextField): Una descripción de la sucursal.
         - `phone_number` (CharField): El número de teléfono de la sucursal, con un máximo de 15 caracteres.
         - `email` (CharField): El correo electrónico de la sucursal, con un máximo de 255 caracteres.
+        - `locality` (CharField): La localidad de la sucursal, con un máximo de 255 caracteres.
         - `address` (CharField): La dirección física de la sucursal, con un máximo de 255 caracteres.
         - `google_link` (TextField): Un enlace a la ubicación de la sucursal en Google Maps.
 
@@ -54,6 +54,11 @@ def query_gemini(prompt, model="gemini-1.5-flash"):
     - `Category`: Organiza los platillos dentro de un menú en categorías específicas. Los campos de este modelo incluyen:
         - `name` (CharField): El nombre de la categoría.
         - `menu` (ForeignKey): Relación con un menú (`Menu`), con eliminación en cascada si se elimina el menú.
+        - `type` (CharField): Tipo de categoría, con opciones como:
+            - `fria`: Comida Fría
+            - `caliente`: Comida Caliente
+            - `postres`: Postres
+            - `bebidas`: Bebidas
         - `slug` (CharField): Un identificador único para la categoría.
 
         El método `__str__` devuelve una cadena con el formato `<nombre de la categoría>-<nombre del menú>`.
@@ -162,3 +167,50 @@ def validate_and_execute_query(query_code, keywords=None):
         return {"error": f"Error al ejecutar la consulta: {str(e)}"}
 
 
+def interpreted_result(result, prompt, model="gemini-1.5-flash"):
+    """
+    Procesa el resultado de una consulta a la base de datos y genera una respuesta organizada y comprensible.
+    """
+    system_instruction = """
+    Eres un asistente especializado en interpretar y presentar información sobre los menús y platillos de un restaurante.
+    Tu objetivo es comunicar de manera clara, organizada y amigable los resultados obtenidos de la base de datos, 
+    proporcionando detalles útiles o sugerencias adicionales, siempre considerando el prompt inicial.
+
+    Instrucciones:
+    1. Si el resultado contiene información específica (como platillos, categorías o sucursales):
+        - Presenta los datos en formato de lista o párrafos claros.
+        - Incluye los detalles más importantes: nombres, descripciones, precios o categorías, según aplique.
+        - Evita mencionar campos técnicos como identificadores únicos o rutas de imágenes.
+
+    2. Si el resultado es una lista de sugerencias:
+        - Indica que no se encontró una coincidencia exacta, pero muestra las alternativas disponibles.
+        - Ordena las sugerencias de manera lógica, por ejemplo, por precio o relevancia.
+
+    3. Si no se encuentra ningún dato relevante:
+        - Proporciona una respuesta amable indicando que no se encontraron resultados y ofrece sugerencias para modificar la consulta.
+
+    4. Si hay errores, ofrece una explicación sencilla del problema y una sugerencia para resolverlo.
+
+    Ejemplos de respuestas:
+    - "El platillo más caro es 'Aguachile de Camarón' con un precio de $250. Incluye camarones frescos, limón y salsa especial."
+    - "No se encontraron platillos exactos con la descripción proporcionada, pero podrías probar con 'Ceviche Mixto' o 'Tostadas de Atún'."
+    - "Parece que hubo un error al procesar la consulta. Por favor, intenta con una pregunta más específica."
+
+    Sé claro, cortés y enfocado en brindar la mejor experiencia al usuario.
+    """
+
+    # Formatear el resultado para enviar como texto
+    
+    formatted_result = str(result)
+    #print(formatted_result)
+
+    message = f"Prompt: {prompt}\n\nResultados:\n{formatted_result}"
+
+    model = genai.GenerativeModel(model_name=model, system_instruction=system_instruction)
+    chat = model.start_chat()
+    response = chat.send_message(message)
+
+    return response.text
+
+    
+    

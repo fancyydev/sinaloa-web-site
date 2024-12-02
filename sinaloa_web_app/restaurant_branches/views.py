@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .gemini_service import query_gemini, validate_and_execute_query, preprocess_prompt
+from .gemini_service import query_gemini, validate_and_execute_query, preprocess_prompt, interpreted_result
 from .models import RestaurantBranch
 from restaurant_menus.models import Menu, Category, Dishes
 from itertools import groupby
@@ -111,6 +111,10 @@ def handle_user_query(request):
         return JsonResponse({"error": query_code})
 
     # Ejecutar la consulta en la cual en caso de no obtener nada dara recomendaciones a partir de las keywords
-    result = validate_and_execute_query(query_code, keywords)
+    result = validate_and_execute_query(query_code, keywords) # Es una lista de diccionarios
+    # print(type(result[0]))
+    # print(result)
     
-    return JsonResponse({"query_code": query_code, "result": result})
+    answer = interpreted_result(result, prompt)
+    
+    return JsonResponse({"query_code": query_code, "result": result, "answer": answer})
