@@ -35,7 +35,7 @@
         <!-- Navbar Container -->
         <div class="menu">
             <!-- Logo -->
-            <a href="#" class="logo">Sinaloa Restaurante</a>
+            <a href="{% url 'restaurant_branches:home' %}" class="logo">Sinaloa Restaurante</a>
 
             <!-- Checkbox for Responsive Menu -->
             <input type="checkbox" id="menu"/>
@@ -46,9 +46,13 @@
             <!-- Navbar Links -->
             <nav class="navbar">
                 <ul>
+                    <li><a href="#">Historia</a></li>
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Redes sociales</a></li>
+                    
                     
                     {% for restaurant in restaurants %}
-                        <li><a href="{% url 'restaurant_branches:menus' restaurant.slug %}">{{ restaurant.name }}</a></li>
+                        <li><a href="{% url 'restaurant_branches:menus' restaurant.slug %}">Sucursales</a></li>
                         
                     {% empty %}
                         <p>No hay restaurantes</p>

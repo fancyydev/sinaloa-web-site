@@ -83,7 +83,7 @@ def menus(request, slug):
 
     return render(
         request,
-        'restaurant_branches/menus.html',
+        'restaurant_branches/menusClean.html',
         {
             'grouped_categories': grouped_categories,
             'dishes_by_category': dishes_by_category,

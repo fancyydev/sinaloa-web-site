@@ -25,11 +25,11 @@ body {
     justify-content: space-between;
     padding: 7px 30px;
     background-color: rgba(0, 0, 0, 0.4); /* Transparent Background */
+    z-index: 10
 }
 
 /* Logo Styles */
 .logo {
-  
     color: #FFFFFF;
     font-size: 25px;
     font-weight: 50;
@@ -38,7 +38,7 @@ body {
 
 /* Navbar Links */
 .navbar {
-    display: flex;
+    display: block;
 }
 
 .navbar ul {
@@ -54,7 +54,6 @@ body {
     font-size: 18px;
     font-weight: 550;
     padding: 10px 20px;
-    
     display: block;
 }
 
@@ -89,6 +88,7 @@ body {
         background-color: rgba(0, 0, 0, 0.8); /* Darker Transparent Background for Mobile */
         display: none;
         flex-direction: column;
+        z-index: 20;
     }
 
     /* Display Navbar Links when Checkbox is Checked */
@@ -108,6 +108,7 @@ body {
 
 .header{
     height: 700px;
+    z-index: 1;
 }
 /* Header Text */
 /* Asegúrate de que .header-content ocupe el 100% del ancho de la página */
