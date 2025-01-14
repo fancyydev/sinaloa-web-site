@@ -7,6 +7,20 @@
     padding: 0;
     box-sizing: border-box;
 }
+/*Card items*/
+#card-project {
+    transition: border 0.1s ease; /* Agrega una transición suave */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+#card-project:hover {
+    border: 3px solid rgb(23, 0, 196); /* Aplica el borde al pasar el mouse */
+    cursor: pointer; /* Cambia el cursor para indicar que es interactivo */
+}
+
+.justify {
+    text-align: justify;
+}
 
 /* Fuente principal para todo el documento */
 body {
@@ -275,255 +289,6 @@ header {
     .opciones {
         width: 100%; /* Botones ocupan todo el ancho del contenedor */
         text-align: center;
-    }
-}
-
-
- /* ================= ELEMENTOS DE LAS SUGERENCIAS ================= */
-/* Sección de sugerencias */
-.menu-sugerencias {
-    margin: 40px auto;
-    max-width: 1200px;
-    text-align: center;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #010066;
-    padding-bottom: 10px;
-    display: block; /* Asegúrate de que sea visible por defecto */
-}
-
-/* Cuando no quieres mostrar las sugerencias */
-.oculto {
-    display: none;
-}
-
-/* Botones de Navegación */
-.botones-nav button {
-    background-color: #010066;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
-}
-
-.botones-nav button:hover {
-    background-color: #3d3a8d;
-}
-
-/* Título de cada sugerencia */
-.sugerencia-item h3 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #010066; /* Azul elegante */
-    margin-bottom: 20px;
-}
-
-/* Grid de sugerencias */
-.menu-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-/* Estilo de cada elemento */
-.menu-item {
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s ease-in-out;
-    padding: 15px;
-    flex: 0 1 calc(25% - 20px); /* Cuatro elementos por fila */
-    max-width: calc(25% - 20px);
-    min-width: 200px;
-}
-
-.menu-item:hover {
-    transform: translateY(-10px); /* Elevación al pasar el mouse */
-}
-
-/* Imágenes de los elementos */
-.menu-item img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.menu-item h3 {
-    font-size: 18px;
-    margin: 10px 0;
-    font-family: 'Arial', sans-serif;
-    color: #010066;
-}
-
-.menu-item p {
-    font-size: 14px;
-    color: #555;
-    margin: 5px 0 10px;
-}
-
-/* Responsividad */
-@media (max-width: 1024px) {
-    .menu-item {
-        flex: 0 1 calc(50% - 20px); /* Dos elementos por fila en tablets */
-    }
-}
-
-@media (max-width: 768px) {
-    .menu-item {
-        flex: 0 1 calc(100% - 20px); /* Un elemento por fila en móviles */
-    }
-}
-
-/* ================= ELEMENTOS DEL MENÚ ================= */
-/* Estilo para la cuadrícula de elementos */
-/* Contenedor centrado */
-.menu-container {
-    display: flex;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    padding: 0 20px; /* Espacio a los lados */
-    box-sizing: border-box;
-    text-align: center; /* Centra el texto dentro del contenedor */
-}
-
-/* Título del tipo de platillo */
-.menu-title {
-    text-align: center; /* Centra el título */
-    font-size: 24px;
-    font-weight: bold;
-    color: #010066;
-    margin-bottom: 20px; /* Separación del título con la cuadrícula */
-}
-
-/* Cuadrícula dentro del contenedor */
-.menu-grid {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente fila si es necesario */
-    gap: 20px; /* Espacio entre los elementos */
-    max-width: 1200px; /* Limita el ancho total */
-    justify-content: center; /* Centra los elementos horizontalmente */
-    margin: 0 auto; /* Centra la cuadrícula en el contenedor */
-}
-
-
-/* Responsividad */
-@media (max-width: 1024px) {
-    .menu-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta el tamaño mínimo */
-    }
-}
-
-@media (max-width: 768px) {
-    .menu-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Ajusta para pantallas pequeñas */
-    }
-}
-
-/* Casillas */
-.menu-item {
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s ease-in-out;
-    padding: 15px;
-    flex: 0 1 calc(20% - 20px); /* Cada casilla ocupa el 20% del ancho menos el espacio entre elementos */
-    max-width: calc(20% - 20px); /* Garantiza que el tamaño máximo sea consistente */
-    min-width: 200px; /* Tamaño mínimo para pantallas más pequeñas */
-    box-sizing: border-box; /* Asegura que el padding y border no afecten el tamaño */
-}
-
-
-.menu-item:hover {
-    transform: translateY(-10px); /* Efecto de elevación */
-}
-
-/* Imagen */
-.menu-item img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.menu-item img:hover {
-    transform: scale(1.1); /* Zoom-in al pasar el mouse */
-}
-
-.menu-item h3 {
-    font-size: 20px;
-    margin: 10px 0;
-    font-family: 'Arial', sans-serif;
-    color: #010066; /* Azul elegante */
-}
-
-.menu-item p {
-    font-size: 16px;
-    color: #555;
-    margin: 5px 0 10px 0;
-}
-
-.price {
-    font-size: 18px;
-    font-weight: bold;
-    color: #e74c3c;
-}
-
-.menu-item button {
-    background-color: #010066;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease-in-out;
-}
-
-.menu-item button:hover {
-    background-color: #0056b3; /* Efecto hover en botón */
-}
-
-
-/* ================= CATEGORÍAS ================= */
-/* Estilo para cada categoría de platillo */
-.categoria-platillo {
-    margin-bottom: 30px;
-    border-bottom: 2px solid #010066;
-    padding-bottom: 10px;
-}
-
-.categoria-platillo h3 {
-    font-size: 24px;
-    color: #010066;
-    margin-bottom: 15px;
-}
-
-/* ================= RESPONSIVIDAD ================= */
-/* Ajustes para pantallas medianas */
-@media (max-width: 1024px) {
-    .menu-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-    }
-}
-
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 768px) {
-    .menu-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columnas */
-    }
-}
-
-/* Ajustes para dispositivos móviles */
-@media (max-width: 480px) {
-    .menu-grid {
-        grid-template-columns: 1fr; /* 1 columna */
     }
 }
 

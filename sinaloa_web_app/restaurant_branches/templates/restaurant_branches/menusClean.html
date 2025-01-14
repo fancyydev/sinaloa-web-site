@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    
     <!-- CSS de Bootstrap -->
     <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
     />
     <!-- Script de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
@@ -17,64 +16,244 @@
     <link rel="stylesheet" href="{% static 'estilos/menus.css' %}">
 
     <title>Menu</title>
+    <style>
+        /* Espaciado dinámico basado en la altura de la navbar */
+        .chatbot-container {
+            margin-top: 75px; /* Ajustado el valor para que sea más adecuado */
+            width: 90%; /* En móviles */
+            max-width: 350px; /* En pantallas grandes */
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .chatbot-container {
+                bottom: 10px;
+                right: 5%;
+            }
+            #chatbot-card {
+                width: 100%;
+            }
+        }
+      
+        @media (min-width: 769px) {
+            .chatbot-container {
+                width: 300px; /* Tamaño estándar en pantallas grandes */
+            }
+        }
+
+        /* Ajuste para la altura del chat en móviles */
+        #chatbot-body {
+            max-height: 60vh; /* Ajuste dinámico basado en la altura de la pantalla */
+            overflow-y: auto;
+        }
+
+        #reopen-chat-btn {
+            z-index: 1070; /* Asegura que el botón esté por encima de otros elementos */
+        }
+    </style>      
 </head>
 <body>
     
-        <!-- Navbar Container -->
-        <div class="menu">
-            <!-- Logo -->
-            <a href="{% url 'restaurant_branches:home' %}" class="logo">Sinaloa Restaurante</a>
+    <!-- Navbar Container -->
+    <div class="menu">
+        <!-- Logo -->
+        <a href="{% url 'restaurant_branches:home' %}" class="logo">Sinaloa Restaurante</a>
 
-            <!-- Checkbox for Responsive Menu -->
-            <input type="checkbox" id="menu"/>
-            <label for="menu" class="menu-icono">
-                <img src="{% static 'images/menu.png' %}" alt="menu" width="25px">
-            </label>
+        <!-- Checkbox for Responsive Menu -->
+        <input type="checkbox" id="menu"/>
+        <label for="menu" class="menu-icono">
+            <img src="{% static 'images/menu.png' %}" alt="menu" width="25px">
+        </label>
 
-            <!-- Navbar Links -->
-            <nav class="navbar">
-                <ul>
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Contacto</a></li>
+        <!-- Navbar Links -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="navbar-space"></div>
+    <header>
+        <h1>Menú Especial</h1>
+        <p>Todos nuestros platillos son preparados al momento</p>
+    </header>
+    <div class="group">
+        <input id="query" class="input" type="search" placeholder="Buscar" name="searchbar" />
+    </div>
+
+    <div class="nav-opciones">
+        {% for type, categories in grouped_categories.items %}
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary mi-boton" onclick="mostrarTodas('{{ type }}')">
+                    {{ type|title }}
+                </button>
+                <button 
+                    type="button" 
+                    class="btn btn-secondary dropdown-toggle dropdown-toggle-split mi-boton" 
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    {% for category in categories %}
+                        <li>
+                            <a class="dropdown-item" href="#" onclick="mostrarCategoria('{{ category.slug }}')">
+                                {{ category.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
                 </ul>
-            </nav>
-        </div>
-        <div class="navbar-space"></div>
-        <header>
-            <h1>Menú Especial</h1>
-            <p>Todos nuestros platillos son preparados al momento</p>
-        </header>
-        <div class="group">
-            <input id="query" class="input" type="search" placeholder="Buscar" name="searchbar" />
-        </div>
+            </div>
+        {% empty %}
+            <p>No hay categorías</p>
+        {% endfor %}
+    </div>
 
-        <div class="nav-opciones">
-            {% for type, categories in grouped_categories.items %}
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary mi-boton" onclick="mostrarTodas('{{ type }}')">
-                        {{ type|title }}
-                    </button>
-                    <button 
-                        type="button" 
-                        class="btn btn-secondary dropdown-toggle dropdown-toggle-split mi-boton" 
-                        data-bs-toggle="dropdown" 
-                        aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        {% for category in categories %}
-                            <li>
-                                <a class="dropdown-item" href="#" onclick="mostrarCategoria('{{ category.slug }}')">
-                                    {{ category.name }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+    <div class="container my-4">
+        {% for category, dishes in dishes_by_category.items %}
+            {% if dishes %}
+            <!-- Menu Section -->
+            <div class="menu-section" id="{{ category.slug }}" data-type="{{ category.type }}">
+                <h3 class="text-center my-4">{{ category.name }}</h3>
+                <div class="row">
+                    {% for dish in dishes %}
+                    <!-- Card Column -->
+                    <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                        <div class="card card-post bg-dark text-light shadow-lg rounded w-100" id="card-project">
+                            <div class="position-relative">
+                                {% if dish.img %}
+                                    <img src="{{ dish.img.url }}" alt="{{ dish.name }}" class="card-img-top img-fluid" style="height: 220px; object-fit: cover;">
+                                {% endif %}
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title">{{ dish.name }}</h3>
+                                <p class="card-text flex-grow-1" style="text-align: justify;">{{ dish.description|striptags|truncatechars:500 }}</p>
+                                <p><strong>Precio:</strong> {{ dish.price }}</p>
+                                <a href="#" class="btn btn-primary mt-auto">Detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
-            {% empty %}
-                <p>No hay categorías</p>
-            {% endfor %}
-        </div>
+            </div>
+            {% endif %}
+        {% empty %}
+            <p>No hay proyectos disponibles.</p>
+        {% endfor %}
+    </div>
     
+    
+    <!-- Botón fijo para reabrir el chat -->
+    <button id="reopen-chat-btn" class="btn btn-primary position-fixed bottom-0 end-0 m-3"
+    style="z-index: 1070;" onclick="toggleChat()">
+    💬 Chat
+    </button>
+
+    <!-- Ventana de Chat flotante -->
+    <div class="chatbot-container position-fixed bottom-0 end-0 p-2 m-3">
+    <div class="card border-primary shadow-lg d-none" id="chatbot-card" style="width: 300px;">
+        <div class="card-header bg-primary text-white d-flex justify-content-between">
+        <span>Chat del Restaurante</span>
+        <button class="btn-close btn-close-white" onclick="toggleChat()" aria-label="Cerrar"></button>
+        </div>
+        <div class="card-body" id="chatbot-body" style="height: 400px; overflow-y: auto;">
+        <p class="text-muted">Pregúntanos cualquier cosa sobre el menú o la sucursal.</p>
+        </div>
+        <div class="card-footer">
+        <div class="input-group">
+            <input type="text" id="chatbot-input" class="form-control" placeholder="Escribe tu pregunta...">
+            <button class="btn btn-primary" onclick="sendMessage()">Enviar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    
+    <script>
+      function toggleChat() {
+        const chatCard = document.getElementById('chatbot-card');
+        const reopenButton = document.getElementById('reopen-chat-btn');
+        
+        // Alternar visibilidad
+        if (chatCard.classList.contains('d-none')) {
+          chatCard.classList.remove('d-none'); // Mostrar chat
+          reopenButton.classList.add('d-none'); // Ocultar botón
+        } else {
+          chatCard.classList.add('d-none'); // Ocultar chat
+          reopenButton.classList.remove('d-none'); // Mostrar botón
+        }
+      }
+
+      async function sendMessage() {
+        const input = document.getElementById('chatbot-input');
+        const message = input.value.trim();
+        if (!message) return;
+
+        // Mostrar mensaje del usuario
+        const chatBody = document.getElementById('chatbot-body');
+        chatBody.innerHTML += `<div><strong>Tú:</strong> ${message}</div>`;
+        input.value = '';
+        
+        // Realizar consulta al servidor
+        const response = await fetch(`/handle_user_query?prompt=${encodeURIComponent(message)}`);
+        const data = await response.json();
+
+        // Mostrar respuesta del servidor
+        if (data.answer) {
+          chatBody.innerHTML += `<div><strong>Sinaloa Asistente:</strong> <p>${data.answer}</p></div>`;
+        } else {
+          chatBody.innerHTML += `<div><strong>Sinaloa Asistente:</strong> <p>Lo siento, no pude encontrar una respuesta.</p></div>`;
+        }
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+
+      document.addEventListener("DOMContentLoaded", () => {
+        mostrarTodas('caliente');
+
+        const sections = document.querySelectorAll(".menu-section");
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");  // Agrega la clase active cuando sea visible
+              observer.unobserve(entry.target);      // Deja de observar una vez que se muestra
+            }
+          });
+        });
+
+        sections.forEach(section => observer.observe(section));
+      });
+
+
+      
+      function mostrarTodas(type) {
+        // Obtener todas las secciones del menú
+        const sections = document.querySelectorAll(".menu-section");
+        
+        // Ocultar todas las secciones primero
+        sections.forEach((section) => section.classList.remove("active"));
+        
+        // Mostrar solo las secciones cuyo data-type coincide con el tipo
+        sections.forEach((section) => {
+          if (section.getAttribute("data-type") === type) {
+            section.classList.add("active");
+          }
+        });
+      }
+
+
+      function mostrarCategoria(slug) {
+          // Ocultar todas las secciones
+          const sections = document.querySelectorAll(".menu-section");
+          sections.forEach((section) => section.classList.remove("active"));
+
+          // Mostrar solo la sección correspondiente al slug
+          const section = document.getElementById(slug);
+          if (section) {
+            section.classList.add("active");
+          }
+      }
+    </script>
 </body>
 </html>
