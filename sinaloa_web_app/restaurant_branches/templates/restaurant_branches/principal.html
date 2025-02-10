@@ -46,13 +46,12 @@
             <!-- Navbar Links -->
             <nav class="navbar">
                 <ul>
-                    <li><a href="#">Historia</a></li>
                     <li><a href="#">Nosotros</a></li>
-                    <li><a href="#">Redes sociales</a></li>
+                    <li><a href="#">Contacto</a></li>
                     
                     
                     {% for restaurant in restaurants %}
-                        <li><a href="{% url 'restaurant_branches:menus' restaurant.slug %}">Sucursales</a></li>
+                        <li><a href="{% url 'restaurant_branches:menus' restaurant.slug %}">Menu</a></li>
                         
                     {% empty %}
                         <p>No hay restaurantes</p>

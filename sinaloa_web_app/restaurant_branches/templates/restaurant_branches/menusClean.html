@@ -69,7 +69,6 @@
         <nav class="navbar">
             <ul>
                 <li><a href="#">Contacto</a></li>
-                <li><a href="#">Contacto</a></li>
             </ul>
         </nav>
     </div>
@@ -128,7 +127,7 @@
                             </div>
                             <div class="card-body d-flex flex-column">
                                 <h3 class="card-title">{{ dish.name }}</h3>
-                                <p class="card-text flex-grow-1" style="text-align: justify;">{{ dish.description|striptags|truncatechars:500 }}</p>
+                                <p class="card-text flex-grow-1" style="text-align: justify;">{{ dish.description|striptags|truncatechars:250 }}</p>
                                 <p><strong>Precio:</strong> {{ dish.price }}</p>
                                 <a href="#" class="btn btn-primary mt-auto">Detalles</a>
                             </div>

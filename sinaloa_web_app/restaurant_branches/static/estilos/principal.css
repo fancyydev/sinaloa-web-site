@@ -305,6 +305,8 @@ body {
 
     transform: translateX(100%); /* Comienza fuera de la pantalla a la derecha */
     animation: slideInRight 1s forwards; /* Aplica la animación */
+    align-content: center;
+    flex-direction: column;
 }
 
 /* Definición de la animación */
