@@ -189,6 +189,7 @@ body {
     .header-txt p {
         font-size: 5vw;
     }
+    
 }
 
 /* Ajustes para pantallas muy pequeñas */
@@ -201,13 +202,48 @@ body {
     }
 }
 
+/* Seccion del contenido*/
+.section-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 20px;
+    padding: 80px;
+    padding-top: 0;
+    padding-bottom: 20px;
+}
+
+
+/* Seccion del titulo */
+.section-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.description {
+    padding-top: 0;
+    color: #fff;
+}
+
+.description p {
+    text-align: justify;
+    margin: 10px;
+}
+
+.description h3 {
+    margin: 10px;
+}
+
+
 /* Carousel container */
 .carousel {
     position: relative;
-    max-width: 60%; /* Limita el ancho del carrusel */
-    margin: 20px auto; /* Centra el carrusel horizontalmente */
+    max-width: 40%; /* Limita el ancho del carrusel */
+    margin: 25px auto; /* Centra el carrusel horizontalmente */
     overflow: hidden;
-    height: 600px; /* Ajusta la altura */
+    height: 400px; /* Ajusta la altura */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -272,6 +308,31 @@ body {
     right: 10px;
 }
 
+.values-section {
+    background-color: #222; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 70%;
+    margin: 5px auto; /* Centra la sección */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Lista de valores */
+.values-list {
+    list-style: none; /* Elimina viñetas */
+    padding: 0;
+    text-align: center;
+}
+
+/* Elementos de la lista */
+.values-list li {
+    margin: 10px 0;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
 /*  mapas*/
 .map-row {
     display: flex;
@@ -291,7 +352,7 @@ body {
   
 
 /* Contenedor de las tarjetas */
-.direcciones {
+.directions {
     display: flex;
     flex-wrap: wrap; /* Permite que las tarjetas se ajusten automáticamente si el espacio no es suficiente */
     justify-content: center; /* Centra las tarjetas horizontalmente */
@@ -301,10 +362,12 @@ body {
     max-width: 1200px; /* Limita el ancho máximo del contenedor */
     margin-left: auto;
     margin-right: auto; 
-    padding-top: 50px;
+    padding-top: 30px;
 
     transform: translateX(100%); /* Comienza fuera de la pantalla a la derecha */
     animation: slideInRight 1s forwards; /* Aplica la animación */
+    align-content: center;
+    flex-direction: column;
 }
 
 /* Definición de la animación */
@@ -318,7 +381,7 @@ body {
 }
 
 /* Si quieres que aparezca solo cuando se active (por ejemplo, al hacer scroll), usa esto */
-.direcciones.visible {
+.directions.visible {
     animation: slideInRight 2s forwards;
 }
 

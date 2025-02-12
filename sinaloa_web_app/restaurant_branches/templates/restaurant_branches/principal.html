@@ -46,13 +46,12 @@
             <!-- Navbar Links -->
             <nav class="navbar">
                 <ul>
-                    <li><a href="#">Historia</a></li>
                     <li><a href="#">Nosotros</a></li>
-                    <li><a href="#">Redes sociales</a></li>
+                    <li><a href="#">Contacto</a></li>
                     
                     
                     {% for restaurant in restaurants %}
-                        <li><a href="{% url 'restaurant_branches:menus' restaurant.slug %}">Sucursales</a></li>
+                        <li><a href="{% url 'restaurant_branches:menus' restaurant.slug %}">Menu</a></li>
                         
                     {% empty %}
                         <p>No hay restaurantes</p>
@@ -72,36 +71,66 @@
         </div>
     </header>
 
+    <div class="section-title">
+        <h1 style="color: #fff;">Nosotros</h1>
+    </div>
+    
     <!-- Additional Content -->
-    <section class="carousel">
-      <div class="carousel-container">
-          <!-- Slide 1 -->
-          <div class="carousel-slide">
-              <img src="{% static 'images/1.jpg' %}" alt="Platillo 1">
-             
-          </div>
-          
-          <!-- Slide 2 -->
-          <div class="carousel-slide">
-              <img src="{% static 'images/2.jpg' %}" alt="Platillo 2">
-              
-          </div>
-          
-          <!-- Slide 3 -->
-          <div class="carousel-slide">
-              <img src="{% static 'images/3.jpg' %}" alt="Platillo 3">
-              
-          </div>
-      </div>
-  
-      <!-- Navigation Buttons -->
-      <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
-      <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
-  </section>
+    <div class="section-content">
+        <section class="carousel">
+            <div class="carousel-container">
+                <!-- Slide 1 -->
+                <div class="carousel-slide">
+                    <img src="{% static 'images/1.jpg' %}" alt="Platillo 1">
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="carousel-slide">
+                    <img src="{% static 'images/2.jpg' %}" alt="Platillo 2">
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="carousel-slide">
+                    <img src="{% static 'images/3.jpg' %}" alt="Platillo 3">
+                </div>
+            </div>
+        
+            <!-- Navigation Buttons -->
+            <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
+            <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+        </section>
+        <div class="description">
+            <p>Bienvenido a Sinaloa Restaurant, un lugar donde la tradición y la calidad se unen para brindarte una experiencia gastronómica inigualable. Fundado por un apasionado de la cocina nacido en Los Mochis, Sinaloa, llevamos hasta tu mesa los sabores auténticos del Mar de Cortés.</p>
+            <p>Desde nuestro primer restaurante en Ameca, Jalisco, hemos trabajado con el compromiso de ofrecer productos frescos, un ambiente acogedor y un servicio de excelencia, para que cada visita sea especial.</p>
+            <h3>Nuestra Misión</h3>
+            <p>Servimos alimentos y bebidas de primera calidad, garantizando una experiencia única y extraordinaria basada en el respeto, la higiene y el compromiso con nuestros clientes y equipo de trabajo.</p>
+            <h3>Nuestra vision</h3>
+            <p>Ser referentes en la industria gastronómica a nivel nacional e internacional, destacándonos por la calidad de nuestros platillos y la innovación constante en nuestro servicio.</p>
+        </div>
+    </div>
 
+    <!-- Sección de Nuestros Valores -->
+    <div class="values-section">
+        <h2>Nuestros Valores</h2>
+        <ul class="values-list">
+            <li>⭐ <strong>Máxima calidad de productos</strong> - Ingredientes frescos y cuidadosamente seleccionados.</li>
+            <li>⭐ <strong>Atención al cliente de excelencia</strong> - Trato cordial y profesional en todo momento.</li>
+            <li>⭐ <strong>Innovación permanente</strong> - Mejora constante en procesos y tecnología.</li>
+            <li>⭐ <strong>Desarrollo del equipo</strong> - Crecimiento continuo de nuestro personal.</li>
+            <li>⭐ <strong>Respeto y ética</strong> - Un ambiente donde todos son valorados.</li>
+        </ul>
+        <p class="values-text">
+            Disfruta de lo mejor del mar con la calidez que nos caracteriza.  
+            <strong>¡Te esperamos en Sinaloa Restaurant!</strong>
+        </p>
+    </div>
+
+    <div class="section-title">
+        <h1 style="color: #fff;">Contacto</h1>
+    </div>
 
     <section>
-        <div class="direcciones">
+        <div class="directions">
             {% for restaurant in restaurants %}
                 <div class="card ">
                     <div class="first-content" >          
